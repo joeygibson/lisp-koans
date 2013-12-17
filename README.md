@@ -1,3 +1,9 @@
+DO NOT FORK THIS REPO!
+----------------------
+
+This is my perfonal fork, into which I am checking my completed (read: answered) koans. You want
+to fork the original project, located at https://github.com/google/lisp-koans
+
 Getting Started
 ---------------
 
