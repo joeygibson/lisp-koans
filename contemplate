@@ -1,0 +1,3 @@
+#!/usr/local/bin/bash
+
+sbcl --script contemplate.lsp
