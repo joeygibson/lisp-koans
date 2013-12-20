@@ -71,14 +71,20 @@
   (assert-equal 0 (reduce #'expt '(10 21 34 43) :initial-value 0)))
 
 
-(defun WRONG-FUNCTION-2 (a b) (a))
-(defun WRONG-FUNCTION-3 (a b) (a))
+;; (defun WRONG-FUNCTION-2 (a b) (a))
+;; (defun WRONG-FUNCTION-3 (a b) (a))
+
+(defun summer (a b)
+  (* a b))
+
+(defun adder (a b)
+  (+ a b))
 
 (define-test test-mapcar-and-reduce
   "mapcar and reduce are a powerful combination.
      insert the correct function names, instead of WRONG-FUNCTION-X
      to define an inner product."
   (defun inner (x y) 
-    (reduce #'WRONG-FUNCTION-2 (mapcar #'WRONG-FUNCTION-3 x y)))
+    (reduce #'adder (mapcar #'summer x y)))
   (assert-equal 32 (inner '(1 2 3) '(4 5 6)))
   (assert-equal 310 (inner '(10 20 30) '(4 3 7))))
