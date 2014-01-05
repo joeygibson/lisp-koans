@@ -48,10 +48,37 @@
 ; More scoring examples are given in the tests below:
 ;
 ; Your goal is to write the score method.
+(defun count-occurrences (dice)
+  (loop for i from 1 to 6 collect (list i (count i dice))))
+
+(defun score-the-ones (ones)
+  (if (>= ones 3)
+      (+ 1000 (score-the-ones (- ones 3)))
+      (* 100 ones)))
+
+(defun score-the-fives (fives)
+  (if (>= fives 3)
+      (+ 500 (score-the-fives (- fives 3)))
+      (* 50 fives)))
+
+(defun score-the-rest (digit cnt)
+  (if (>= cnt 3)
+      (+ (* digit 100) (score-the-rest digit (- cnt 3)))
+      0))
+
+(defun compute (digit-and-count)
+  (let ((digit (car digit-and-count))
+        (cnt (cadr digit-and-count)))
+    (case digit
+      (1 (score-the-ones cnt))
+      (5 (score-the-fives cnt))
+      (t (score-the-rest digit cnt)))))
 
 (defun score (dice)
-  ; You need to write this method
-)
+  (if dice
+      (let ((counts (count-occurrences dice)))
+        (loop for i in counts sum (compute i)))
+      0))
 
 (define-test test-score-of-an-empty-list-is-zero
     (assert-equal 0 (score nil)))
